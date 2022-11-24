@@ -5,13 +5,13 @@ LL is a lightweight and simple yet useful logging c++ library
 ### Initialization
 ```c++
     Log::SetLogLevel(LogLevel::Full); // decide what logs will be outputted 
-    Log::InitStdOutHandle();          // initialize std output for colored output
+    Log::InitStdOutHandle();          // initialize std output for colored output (ignore for normal colors)
     Log::SetTitle("LightLog");        // set console title
 ```
 or, for dlls:
 ```c++
     Log::SetLogLevel(LogLevel::Full);        // decide what logs will be outputted 
-    Log::InitStdOutHandle();                 // initialize std output for colored output
+    Log::InitStdOutHandle();                 // initialize std output for colored output (ignore for normal colors)
     Log::AllocConsoleWithTitle("LightLog");  // allocate console & set console title (for dlls)
 ```
 ### Output
