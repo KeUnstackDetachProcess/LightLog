@@ -12,7 +12,7 @@ or, for dlls:
 ```c++
     Log::SetLogLevel(LogLevel::Full);        // decide what logs will be outputted 
     Log::InitStdOutHandle();                 // initialize std output for colored output
-    Log::AllocConsoleWithTitle("LightLog"); // allocate console & set console title (for dlls)
+    Log::AllocConsoleWithTitle("LightLog");  // allocate console & set console title (for dlls)
 ```
 ### Output
 ```c++
@@ -20,4 +20,12 @@ or, for dlls:
     Log::Info("(%i) Info...", 2);
     Log::Warn("(%i) Warn", 3);
     Log::Err("(%i) Error!", 4);
+```
+### Using xor helpers for output
+(xor is automatically used, if not imported it will simply not xor)
+```c++
+    __Ok("(%i) Ok!", 1);
+    __Info("(%i) Info...", 2);
+    __Warn("(%i) Warn", 3);
+    __Err("(%i) Error!", 4);
 ```
