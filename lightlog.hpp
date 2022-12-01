@@ -39,7 +39,7 @@ private:
 public:
 
     static void SetLogLevel(LogLevel level = LogLevel::Full) { logLevel = level; }
-    
+
     static void InitStdOutHandle() {
         Log::_hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
         if (Log::_hStdOut) Log::_bIsStdInitialized = true;
@@ -63,22 +63,22 @@ public:
     static void Ok(std::string format, ...) {
         if (logLevel != LogLevel::Full && logLevel != LogLevel::Medium) return;
         va_list args;
-        __crt_va_start(args, format);
+        va_start(args, format);
         if (Log::_bIsStdInitialized) {
-            std::cout << xor("[");
+            std::cout << xor ("[");
             SetConsoleTextAttribute(Log::_hStdOut, OK_COLOR);
-            std::cout << xor("+");
+            std::cout << xor ("+");
             SetConsoleTextAttribute(Log::_hStdOut, RESET_COLOR);
             _vfprintf_l(stdout, ("] " + format + "\n").c_str(), NULL, args);
         }
         else _vfprintf_l(stdout, std::string(xor ("[+] ")).append(format + "\n").c_str(), NULL, args);
-        __crt_va_end(args);
+        va_end(args);
     }
 
     static void Info(std::string format, ...) {
         if (logLevel != LogLevel::Full) return;
         va_list args;
-        __crt_va_start(args, format);
+        va_start(args, format);
         if (Log::_bIsStdInitialized) {
             std::cout << xor ("[");
             SetConsoleTextAttribute(Log::_hStdOut, INFO_COLOR);
@@ -87,13 +87,13 @@ public:
             _vfprintf_l(stdout, ("] " + format + "\n").c_str(), NULL, args);
         }
         else _vfprintf_l(stdout, std::string(xor ("[~] ")).append(format + "\n").c_str(), NULL, args);
-        __crt_va_end(args);
+        va_end(args);
     }
 
     static void Warn(std::string format, ...) {
         if (logLevel == LogLevel::Critical || logLevel == LogLevel::None) return;
         va_list args;
-        __crt_va_start(args, format);
+        va_start(args, format);
         if (Log::_bIsStdInitialized) {
             std::cout << xor ("[");
             SetConsoleTextAttribute(Log::_hStdOut, WARN_COLOR);
@@ -102,13 +102,13 @@ public:
             _vfprintf_l(stdout, ("] " + format + "\n").c_str(), NULL, args);
         }
         else _vfprintf_l(stdout, std::string(xor ("[!] ")).append(format + "\n").c_str(), NULL, args);
-        __crt_va_end(args);
+        va_end(args);
     }
 
     static void Err(std::string format, ...) {
         if (logLevel == LogLevel::None) return;
         va_list args;
-        __crt_va_start(args, format);
+        va_start(args, format);
         if (Log::_bIsStdInitialized) {
             std::cout << xor ("[");
             SetConsoleTextAttribute(Log::_hStdOut, ERROR_COLOR);
@@ -117,6 +117,6 @@ public:
             _vfprintf_l(stdout, ("] " + format + "\n").c_str(), NULL, args);
         }
         else _vfprintf_l(stdout, std::string(xor ("[-] ")).append(format + "\n").c_str(), NULL, args);
-        __crt_va_end(args);
+        va_end(args);
     }
 };
